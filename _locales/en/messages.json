@@ -1,0 +1,10 @@
+{
+  "extName": {
+    "message": "BÉPO Keyboard Layout",
+    "description": "Extension name."
+  },
+  "extDesc": {
+    "message": "Support for the French dvorak-like BÉPO keyboard layout in Chrome OS.",
+    "description": "Extension description."
+  }
+}
