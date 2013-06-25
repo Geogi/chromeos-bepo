@@ -63,7 +63,7 @@ ime_api.onBlur.addListener(function(contextID) {
 });
 ime_api.onDeactivated.addListener(function(engineID) {
   altGr = false;
-}
+});
 
 ime_api.onKeyEvent.addListener(
 function(engineID, keyData) {
