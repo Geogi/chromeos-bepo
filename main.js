@@ -77,7 +77,7 @@ function(engineID, keyData) {
     var state = 0 + (keyData.shiftKey ? 1 : 0) + (altGr ? 2 : 0);
     var text = mappings[keyData.code][state];
     chrome.input.ime.commitText({"contextID": context_id,
-                                 "text": text + "a"});
+                                 "text": text});
     return true;
   }
 
