@@ -76,9 +76,11 @@ function(engineID, keyData) {
   /*DEBUG*/ console.log({"kd": keyData, "altgr": altGr});
   if (keyData.type == "keydown" && mappings.hasOwnProperty(keyData.code)) {
     var state = 0 + (keyData.shiftKey ? 1 : 0) + (altGr ? 2 : 0);
-    /*DEBUG*/ console.log(mappings[keyData.code][state]);
+    var text = mappings[keyData.code][state];
+    /*DEBUG*/ console.log(text);
     chrome.input.ime.commitText({"contextID": context_id,
-                                 "text": mappings[keyData.code][state]});
+                                 "text": text});
+    /*DEBUG*/ console.log(chrome.runtime.lastError);
     return true;
   }
 
