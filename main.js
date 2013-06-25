@@ -69,11 +69,9 @@ ime_api.onKeyEvent.addListener(
 function(engineID, keyData) {
   if (keyData.type == "keydown" && keyData.code == "AltRight") {
     altGr = true;
-    return false;
   }
   if (keyData.type == "keyup" && keyData.code == "AltRight") {
     altGr = false;
-    return false;
   }
   /*DEBUG*/ console.log({"kd": keyData, "altgr": altGr});
   if (keyData.type == "keydown" && mappings.hasOwnProperty(keyData.code)) {
