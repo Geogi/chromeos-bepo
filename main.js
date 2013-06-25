@@ -73,14 +73,12 @@ function(engineID, keyData) {
   if (keyData.type == "keyup" && keyData.code == "AltRight") {
     altGr = false;
   }
-  /*DEBUG*/ console.log({"kd": keyData, "altgr": altGr});
   if (keyData.type == "keydown" && mappings.hasOwnProperty(keyData.code)) {
     var state = 0 + (keyData.shiftKey ? 1 : 0) + (altGr ? 2 : 0);
     var text = mappings[keyData.code][state];
-    /*DEBUG*/ console.log(text);
     chrome.input.ime.commitText({"contextID": context_id,
-                                 "text": text});
-    /*DEBUG*/ console.log(chrome.runtime.lastError);
+                                 "text": text},
+                                 function (success) { if (!success) console.log("Failed: " + chrome.runtime.lastError); else console.log("ok");});
     return true;
   }
 
