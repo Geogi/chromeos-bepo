@@ -53,6 +53,7 @@ var mappings = {
 var ime_api = chrome.input.ime;
 
 var context_id = -1;
+var altGr = false;
 
 ime_api.onFocus.addListener(function(context) {
   context_id = context.contextID;
@@ -63,7 +64,9 @@ ime_api.onBlur.addListener(function(contextID) {
 
 ime_api.onKeyEvent.addListener(
 function(engineID, keyData) {
-  console.log(keyData);
+  if (keyData.type == "keydown" && keyData.code == "AltRight") altGr = true;
+  if (keyData.type == "keyup" && keyData.code == "AltRight") altGr = false;
+  console.log({"kd": keyData, "altgr": altGr});
  // if (keyData.type == "keydown" && mappings.hasOwnProperty(keyData.code)) {
  //   var state = 0 + (keyData.shiftKey ? 1 : 0) + (keyData.altKey ? 2 : 0);
  //   chrome.input.ime.commitText({"contextID": context_id,
