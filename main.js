@@ -64,7 +64,7 @@ ime_api.onBlur.addListener(function(contextID) {
 ime_api.onKeyEvent.addListener(
 function(engineID, keyData) {
   if (keyData.type == "keydown" && mappings.hasOwnProperty(keyData.code)) {
-    var state = 0 + (keyData.getModifierState("Shift") ? 1 : 0) + (keyData.getModifierState("AltGraph") ? 2 : 0);
+    var state = 0 + (keyData.shiftKey ? 1 : 0) + (keyData.altKey ? 2 : 0);
     chrome.input.ime.commitText({"contextID": context_id,
                                  "text": mappings[keyData.code[state]]});
     return true;
