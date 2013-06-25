@@ -69,15 +69,17 @@ ime_api.onKeyEvent.addListener(
 function(engineID, keyData) {
   if (keyData.type == "keydown" && keyData.code == "AltRight") {
     altGr = true;
+    return true;
   }
   if (keyData.type == "keyup" && keyData.code == "AltRight") {
     altGr = false;
+    return true;
   }
   if (keyData.type == "keydown" && mappings.hasOwnProperty(keyData.code)) {
     var state = 0 + (keyData.shiftKey ? 1 : 0) + (altGr ? 2 : 0);
     var text = mappings[keyData.code][state];
     chrome.input.ime.commitText({"contextID": context_id,
-                                 "text": text + ""});
+                                 "text": text});
     return true;
   }
 
