@@ -61,18 +61,27 @@ ime_api.onFocus.addListener(function(context) {
 ime_api.onBlur.addListener(function(contextID) {
   context_id = -1;
 });
+ime_api.onDeactivated.addListener(function(engineID) {
+  altGr = false;
+}
 
 ime_api.onKeyEvent.addListener(
 function(engineID, keyData) {
-  if (keyData.type == "keydown" && keyData.code == "AltRight") altGr = true;
-  if (keyData.type == "keyup" && keyData.code == "AltRight") altGr = false;
-  console.log({"kd": keyData, "altgr": altGr});
- // if (keyData.type == "keydown" && mappings.hasOwnProperty(keyData.code)) {
- //   var state = 0 + (keyData.shiftKey ? 1 : 0) + (keyData.altKey ? 2 : 0);
- //   chrome.input.ime.commitText({"contextID": context_id,
- //                                "text": mappings[keyData.code][state]});
- //   return true;
- // }
+  if (keyData.type == "keydown" && keyData.code == "AltRight") {
+    altGr = true;
+    return false;
+  }
+  if (keyData.type == "keyup" && keyData.code == "AltRight") {
+    altGr = false;
+    return false;
+  }
+  /*DEBUG*/ console.log({"kd": keyData, "altgr": altGr});
+  if (keyData.type == "keydown" && mappings.hasOwnProperty(keyData.code)) {
+    var state = 0 + (keyData.shiftKey ? 1 : 0) + (altGr ? 2 : 0);
+    chrome.input.ime.commitText({"contextID": context_id,
+                                 "text": mappings[keyData.code][state]});
+    return true;
+  }
 
   return false;
 });
